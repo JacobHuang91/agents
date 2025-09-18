@@ -3,8 +3,12 @@ from crewai.project import CrewBase, agent, crew, task
 
 
 @CrewBase
-class Debate():
-    """Debate crew"""
+class Debate:
+    """
+    Debate crew
+    Task = 工作内容（What）
+    Agent = 执行者（Who + How）
+    """
 
 
     agents_config = 'config/agents.yaml'
@@ -47,6 +51,10 @@ class Debate():
     def crew(self) -> Crew:
         """Creates the Debate crew"""
 
+        """
+        process=Process.sequential → 任务是按定义顺序顺序执行。
+        self.tasks 是由你用 @task 装饰器的方法生成的 Task 列表
+        """
         return Crew(
             agents=self.agents, # Automatically created by the @agent decorator
             tasks=self.tasks, # Automatically created by the @task decorator

@@ -31,7 +31,7 @@ class TrendingCompanyResearchList(BaseModel):
 
 
 @CrewBase
-class StockPicker():
+class StockPicker:
     """StockPicker crew"""
 
     agents_config = 'config/agents.yaml'
@@ -71,9 +71,6 @@ class StockPicker():
         return Task(
             config=self.tasks_config['pick_best_company'],
         )
-    
-
-
 
     @crew
     def crew(self) -> Crew:
@@ -87,7 +84,7 @@ class StockPicker():
         return Crew(
             agents=self.agents,
             tasks=self.tasks, 
-            process=Process.hierarchical,
+            process=Process.hierarchical,  # 让llm自己决定任务分配
             verbose=True,
             manager_agent=manager,
             memory=True,
@@ -109,7 +106,8 @@ class StockPicker():
                         type="short_term",
                         path="./memory/"
                     )
-                ),            # Entity memory for tracking key information about entities
+                ),
+            # Entity memory for tracking key information about entities
             entity_memory = EntityMemory(
                 storage=RAGStorage(
                     embedder_config={

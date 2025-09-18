@@ -1,10 +1,7 @@
 #!/usr/bin/env python
-import sys
 import warnings
 
-from datetime import datetime
-
-from debate.crew import Debate
+from .crew import Debate
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
